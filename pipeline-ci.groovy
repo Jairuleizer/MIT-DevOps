@@ -9,11 +9,30 @@ pipeline {
                 echo 'Fazendo a build do projeto'
             }
         }
-        stage('Unit Tests') {
-            steps {
-                echo 'Fazer testes unitários'
+
+        stage('Continuous Delivery') {
+            parallel {
+                stage('Teste unitários') {
+                    steps {
+                        echo "Trecho 1"
+                    }
+                }
+
+                stage('Testes de aceitação') {
+                    steps {
+                        echo "Trecho 2"
+                    }
+                }
+
+                stage('Testes de negócio') {
+                    steps {
+                        echo "Trecho 3"
+                    }
+                }
+
             }
         }
+
         stage('Deploy to Stage') {
             steps {
                 echo 'Fazer deploy em ambiente de homologação (staging).'
